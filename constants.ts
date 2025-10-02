@@ -4,7 +4,7 @@ export const PROFILE_DATA: Profile = {
   name: "Pamitha Kaluaratchi",
   title: "Web Developer",
   bio: "Web Developer with 6+ years of experience building scalable, responsive web applications using Angular, React, .Net Core and Java Spring Boot. Possesses a strong understanding of design principles and demonstrates analytical and problem-solving skills.",
-  avatarUrl: "assets/img/1666568866545.jpeg",
+  avatarUrl: "https://github.com/PamithaG/PamithaG.github.io/blob/main/assets/img/1666568866545.jpeg?raw=true",
   email: "pamithagk@gmail.com",
   socials: {
     github: "https://github.com/pamithagk",
