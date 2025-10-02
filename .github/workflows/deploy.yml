@@ -5,17 +5,26 @@ on:
     branches: [ main ]
 
 jobs:
-  build-deploy:
+  build:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v3
+
       - uses: actions/setup-node@v3
         with:
           node-version: 18
+
       - run: npm ci
       - run: npm run build
-      - uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.PERSONAL_TOKEN }}
-          publish_dir: ./dist
-          publish_branch: main   # must be main for username.github.io
+
+      # Move dist/ to docs/ so Pages can serve it
+      - run: |
+          rm -rf docs
+          mv dist docs
+      - run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add docs -f
+          git commit -m "Deploy to GitHub Pages" || echo "No changes to commit"
+          git push
