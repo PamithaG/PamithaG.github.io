@@ -1,31 +1,33 @@
-name: Deploy Vite app to GitHub Pages
+name: Deploy Vite site to GitHub Pages
 
 on:
   push:
     branches: [ main ]
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v3
-
       - uses: actions/setup-node@v3
         with:
           node-version: 18
-
       - run: npm ci
       - run: npm run build
+      - run: touch dist/.nojekyll   # prevent Jekyll from breaking Vite build
+      - uses: actions/upload-pages-artifact@v2
+        with:
+          path: dist
 
-      # Move dist/ to docs/ so Pages can serve it
-      - run: |
-          rm -rf docs
-          mv dist docs
-          touch docs/.nojekyll   # 👈 prevents Jekyll from running
-      - run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-          git add docs -f
-          git commit -m "Deploy to GitHub Pages" || echo "No changes to commit"
-          git push
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
