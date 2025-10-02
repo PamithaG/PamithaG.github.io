@@ -2,6 +2,7 @@
 import React from 'react';
 import { SKILLS_DATA } from '../constants';
 import type { Skill } from '../types';
+import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 const SectionTitle: React.FC<{ children: React.ReactNode }> = ({ children }) => (
     <h2 className="text-3xl font-bold text-slate-100 mb-8 relative inline-block">
@@ -11,6 +12,7 @@ const SectionTitle: React.FC<{ children: React.ReactNode }> = ({ children }) => 
 );
 
 const Skills: React.FC = () => {
+    const { ref, animationClasses } = useScrollAnimation<HTMLElement>();
     const categorizedSkills = SKILLS_DATA.reduce((acc, skill) => {
         if (!acc[skill.category]) {
             acc[skill.category] = [];
@@ -20,7 +22,7 @@ const Skills: React.FC = () => {
     }, {} as Record<Skill['category'], Skill[]>);
 
     return (
-        <section id="skills">
+        <section id="skills" ref={ref} className={animationClasses}>
             <SectionTitle>My Skills</SectionTitle>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 {Object.entries(categorizedSkills).map(([category, skills]) => (

@@ -1,5 +1,6 @@
 import React from 'react';
 import { EXPERIENCE_DATA } from '../constants';
+import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 const SectionTitle: React.FC<{ children: React.ReactNode }> = ({ children }) => (
     <h2 className="text-3xl font-bold text-slate-100 mb-8 relative inline-block">
@@ -9,8 +10,9 @@ const SectionTitle: React.FC<{ children: React.ReactNode }> = ({ children }) => 
 );
 
 const Experience: React.FC = () => {
+  const { ref, animationClasses } = useScrollAnimation<HTMLElement>();
   return (
-    <section id="experience">
+    <section id="experience" ref={ref} className={animationClasses}>
       <SectionTitle>Work Experience</SectionTitle>
       <div className="relative border-l-2 border-sky-500/30 ml-4 md:ml-0">
         {EXPERIENCE_DATA.map((job, index) => (

@@ -3,6 +3,7 @@ import React from 'react';
 import { PROJECTS_DATA } from '../constants';
 import GithubIcon from './icons/GithubIcon';
 import ExternalLinkIcon from './icons/ExternalLinkIcon';
+import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 const SectionTitle: React.FC<{ children: React.ReactNode }> = ({ children }) => (
     <h2 className="text-3xl font-bold text-slate-100 mb-8 relative inline-block">
@@ -12,8 +13,9 @@ const SectionTitle: React.FC<{ children: React.ReactNode }> = ({ children }) => 
 );
 
 const Projects: React.FC = () => {
+  const { ref, animationClasses } = useScrollAnimation<HTMLElement>();
   return (
-    <section id="projects">
+    <section id="projects" ref={ref} className={animationClasses}>
       <SectionTitle>My Projects</SectionTitle>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
         {PROJECTS_DATA.map((project, index) => (

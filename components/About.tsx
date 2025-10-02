@@ -1,4 +1,5 @@
 import React from 'react';
+import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 const SectionTitle: React.FC<{ children: React.ReactNode }> = ({ children }) => (
     <h2 className="text-3xl font-bold text-slate-100 mb-8 relative inline-block">
@@ -9,8 +10,9 @@ const SectionTitle: React.FC<{ children: React.ReactNode }> = ({ children }) => 
 
 
 const About: React.FC = () => {
+  const { ref, animationClasses } = useScrollAnimation<HTMLElement>();
   return (
-    <section id="about">
+    <section id="about" ref={ref} className={animationClasses}>
         <SectionTitle>About Me</SectionTitle>
         <div className="max-w-3xl text-lg text-slate-400 space-y-4">
             <p>
