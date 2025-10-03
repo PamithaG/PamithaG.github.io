@@ -7,7 +7,7 @@ export const PROFILE_DATA: Profile = {
   avatarUrl: "https://github.com/PamithaG/PamithaG.github.io/blob/main/assets/img/1666568866545.jpeg?raw=true",
   email: "pamithagk@gmail.com",
   socials: {
-    github: "https://github.com/pamithagk",
+    github: "https://github.com/pamithag",
     linkedin: "https://linkedin.com/in/pamithagk",
   },
 };
